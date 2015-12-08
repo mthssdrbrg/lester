@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://127.0.0.1:4000/acme/new-authz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 405
+      message: Method Not Allowed
+    headers:
+      Allow:
+      - POST
+      Content-Type:
+      - application/problem+json
+      Replay-Nonce:
+      - nivK3lvQemeqPlxezrNF6Teb7SBJIywII1UhUpyeUW8
+      Date:
+      - Sat, 12 Dec 2015 09:36:10 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sat, 12 Dec 2015 09:36:10 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:4000/acme/new-authz
+    body:
+      encoding: UTF-8
+      string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIm5vbmNlIjoibml2SzNsdlFlbWVxUGx4ZXpyTkY2VGViN1NCSkl5d0lJMVVoVXB5ZVVXOCIsImp3ayI6eyJrdHkiOiJSU0EiLCJlIjoiQVFBQiIsIm4iOiI1QkZzQzFxUWxRR1RDLURiY1lfY21NaFFJSG1yd3VCYmZOeW1BMU9HYXpzWkliWVpvekVoVmotSmMtcXJCYzYzOE1uZHNRcUtwUF96NFpPQ0NMQ1Ryd05rM2JjX2pUXzFpaXJ4Y1g1RU82YmVrcU4tdEtzZFNkTnZFUTZwY2FFeWhuQTZnTlJma19VSTM1S0hON2ZlaWkxSU05d2RDRW5qRjBocDdGdXpCYU1aT05pYTlKYXB2SFE2aW1ydHZwMFJpNUNSSTBzbFVNZHRnZnY0UUVIOS13dHk1M1hsWnRLT1kzQV9kR255RmxNcEFJdThFVUQtMTFMUWxvR1ZzMi1ONVZfMy1hU2NrMzQ2X1pFNEE0M2ZVYkJjdElyZjRTUnlUNTd0Zm5qc0l1RE0xUmR2aVFkVDB4c2UxcGxVU2VUb0Ywa0FONU5iV3k3blNKMDZHTWg5clEifX0","payload":"eyJyZXNvdXJjZSI6Im5ldy1hdXRoeiIsImlkZW50aWZpZXIiOnsidHlwZSI6ImRucyIsInZhbHVlIjoiZXhhbXBsZS5vcmcifX0","signature":"44R4iCec1Wit09vBBGkKnUJw10sxvY5i-xj8T6ndy-gwXWO7N8-5h84epq32kEeGLcpLIX7JAbt6LKs9gJm5C1O_5vYR6chukZANlzQhVqRVtjTenTr1lbUT276suZ4bOmKuqjts5cPiz1tKvIYhXVwNd927QKudf0PjTvVvixTvubUfadghSWr3HbcRGPIt0FaWZchZhKN5FtX5E8vzevUpg1jMuaxY5PNIXUegqysj-ZW8y3ZkFLO-1ZNK8q7y63d8Qe0BI6zKrDEw0pujFEfMk4ybfqGxyPq9FdH3C7Q-N3D0KWDKwZlze6zLztLWSMN07Aurf9uGJGocWTPNKg"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Content-Type:
+      - application/problem+json
+      Replay-Nonce:
+      - r3cXZnYPrb2SBLE-Ly6v19BPZrvaN7KsA8Imn_5MvaE
+      Date:
+      - Sat, 12 Dec 2015 09:36:10 GMT
+      Content-Length:
+      - '107'
+    body:
+      encoding: UTF-8
+      string: '{"type":"urn:acme:error:unauthorized","detail":"No registration exists
+        matching provided key","status":403}'
+    http_version: 
+  recorded_at: Sat, 12 Dec 2015 09:36:10 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+$: << 'lib'
+
+require 'lester'
+
+
+exit(Lester::Cli.new(ARGV).run)
