@@ -79,7 +79,7 @@ module Lester
         opts.on('-E', '--endpoint=ENDPOINT', sprintf('ACME endpoint (default: %s)', @endpoint)) { |e| @endpoint = e }
         opts.on('-b', '--site-bucket=BUCKET', 'S3 bucket for site (required)') { |b| @site_bucket = b }
         opts.on('-k', '--key-size=BITS', sprintf('Key size (in bits) (default: %d)', @key_size)) { |s| @key_size = s.to_i }
-        opts.on('-e', '--email=ADDRESS', 'Registered email address') { |e| @email = e }
+        opts.on('-e', '--email=ADDRESS', 'Registered email address (required)') { |e| @email = e }
         opts.separator ''
       end
     end
