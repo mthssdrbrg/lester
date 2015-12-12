@@ -25,21 +25,30 @@ gem install lester --pre
 To get started and upload a local private key the following command can be used:
 
 ```shell
-lester init --domain example.org --storage-bucket example-org-backup --private-key privkey.pem
+lester init --domain example.org \
+            --storage-bucket example-org-backup \
+            --private-key privkey.pem
 ```
 
 To generate a new certificate, the simplest invocation of `lester` is the
 following:
 
 ```shell
-lester new --domain example.org --site-bucket example-org --storage-bucket example-org-backup --email contact@example.org
+lester new --domain example.org \
+           --site-bucket example-org \
+           --storage-bucket example-org-backup \
+           --email contact@example.org
 ```
 
 To enable server side encryption with KMS, one can specify the `-k / --kms-id`
 with eiither a key ID or alias:
 
 ```shell
-lester new --domain example.org --kms-id alias/letsencrypt --site-bucket example-org --storage-bucket example-org-backup --email contact@example.org
+lester new --domain example.org \
+           --site-bucket example-org \
+           --storage-bucket example-org-backup \
+           --email contact@example.org \
+           --kms-id alias/letsencrypt
 ```
 
 It's also possible to use `renew` rather than `new` if one prefers, the result
