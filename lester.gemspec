@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = %w[lib]
   s.bindir        = 'bin'
   s.executables   = %w[lester]
+  s.license       = 'MIT'
   s.add_runtime_dependency 'acme-client', '< 1'
   s.add_runtime_dependency 'aws-sdk', '~> 2'
   s.add_development_dependency 'rspec', '~> 3'
