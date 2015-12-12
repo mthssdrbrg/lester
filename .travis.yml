@@ -1,0 +1,11 @@
+language: ruby
+sudo: false
+script: bundle exec rspec
+cache:
+  - bundler
+rvm:
+  - 2.1
+  - 2.2
+  - 2
+matrix:
+  fast_finish: true
