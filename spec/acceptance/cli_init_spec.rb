@@ -44,7 +44,7 @@ describe 'bin/lester init' do
       expect { OpenSSL::PKey::RSA.new(object.read) }.to_not raise_error
     end
 
-    it 'exists with 0' do
+    it 'returns an ok exit code' do
       code = command.run
       expect(code).to eq(0)
     end
@@ -60,7 +60,7 @@ describe 'bin/lester init' do
       expect(io.string).to match(/No such file or directory/)
     end
 
-    it 'exists with 1' do
+    it 'returns a non-ok exit code' do
       code = command.run
       expect(code).to eq(1)
     end

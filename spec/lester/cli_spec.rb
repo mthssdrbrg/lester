@@ -82,7 +82,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -109,7 +109,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -135,7 +135,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -162,7 +162,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -188,7 +188,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -253,7 +253,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -282,7 +282,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -310,7 +310,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -339,7 +339,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -367,7 +367,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -396,7 +396,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end
@@ -424,7 +424,7 @@ module Lester
               expect(output).to match(/Usage/)
             end
 
-            it 'exists with 1 as code' do
+            it 'returns a non-ok exit code' do
               code = cli.run
               expect(code).to eq(1)
             end

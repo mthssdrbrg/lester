@@ -108,7 +108,7 @@ describe 'bin/lester renew' do
         end
       end
 
-      it 'returns 0 as exit code' do
+      it 'returns an ok exit code' do
         code = command.run
         expect(code).to eq(0)
       end
