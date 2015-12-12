@@ -5,6 +5,7 @@ require 'stringio'
 
 require 'support/fake_bucket'
 require 'support/fake_iam'
+require 'support/acceptance_setup'
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/support/cassettes'
