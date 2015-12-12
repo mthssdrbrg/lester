@@ -1,6 +1,7 @@
 require 'acme-client'
 require 'aws-sdk'
 require 'json'
+require 'pathname'
 
 module Lester
   Error = Class.new(StandardError)

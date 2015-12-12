@@ -87,6 +87,7 @@ module Lester
 
         it 'authorizes using the ACME client' do
           expect(acme_client).to have_received(:authorize).with(domain: 'example.org')
+          expect(acme_client).to have_received(:authorize).with(domain: 'www.example.org')
         end
 
         it 'requests a new certificate' do
@@ -105,15 +106,15 @@ module Lester
           expect(store).to have_received(:put).with('201601010000/csr.pem', anything)
         end
 
-        it 'stores the certificate\'s chain under a timestamp prefix' do
+        it 'stores the certificate chain under a timestamp prefix' do
           expect(store).to have_received(:put).with('201601010000/chain.pem', chain.map(&:to_pem).join)
         end
 
-        it 'stores the certificate\'s fullchain under a timestamp prefix' do
+        it 'stores the certificate fullchain under a timestamp prefix' do
           expect(store).to have_received(:put).with('201601010000/fullchain.pem', certificate.to_pem + chain.map(&:to_pem).join)
         end
 
-        it 'stores the certificate\'s private key under a timestamp prefix' do
+        it 'stores the certificate private key under a timestamp prefix' do
           expect(store).to have_received(:put).with('201601010000/privkey.pem', private_key.to_pem)
         end
       end

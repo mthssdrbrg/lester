@@ -1,5 +1,3 @@
-require 'pathname'
-
 module Lester
   class PrivateKey
     def initialize(path)

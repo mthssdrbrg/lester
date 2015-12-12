@@ -26,16 +26,15 @@ module Lester
       private
 
       def auth
-        [@domain, sprintf('www.%s', @domain)].each do |domain|
+        domains.each do |domain|
           authorization = @acme_client.authorize(domain: domain)
           @authenticator.authenticate(authorization.http01)
         end
       end
 
       def renew
-        names = [@domain, sprintf('www.%s', @domain)]
         key = @key_class.new(@key_size)
-        @csr = @csr_class.new(names: names, private_key: key)
+        @csr = @csr_class.new(names: domains, private_key: key)
         @certificate = @acme_client.new_certificate(@csr)
       end
 
@@ -54,6 +53,10 @@ module Lester
 
       def issue_date
         @issue_date ||= @certificate.x509.not_before.strftime('%Y%m%d%H%M')
+      end
+
+      def domains
+        @domains ||= [@domain, sprintf('www.%s', @domain)]
       end
     end
   end
