@@ -99,9 +99,42 @@ describe 'bin/lester renew' do
         expect { OpenSSL::PKey::RSA.new(object.read) }.to_not raise_error
       end
 
+      it 'uses server side encryption for everything that is stored' do
+        command.run
+        keys = storage_bucket.keys.select { |k| k.start_with?('example.org/certificates') }
+        keys.each do |key|
+          object = storage_bucket.object(key)
+          expect(object.options).to include(server_side_encryption: 'AES256')
+        end
+      end
+
       it 'returns 0 as exit code' do
         code = command.run
         expect(code).to eq(0)
+      end
+
+      context 'when a KMS ID is specified' do
+        let :argv do
+          [
+            'renew',
+            '--domain', 'example.org',
+            '--endpoint', 'http://127.0.0.1:4000',
+            '--site-bucket', 'example-org-site',
+            '--storage-bucket', 'example-org-backup',
+            '--email', 'contact@example.org',
+            '--kms-id', 'alias/letsencrypt',
+          ]
+        end
+
+        it 'uses server side encryption through AWS KMS' do
+          command.run
+          keys = storage_bucket.keys.select { |k| k.start_with?('example.org/certificates') }
+          keys.each do |key|
+            object = storage_bucket.object(key)
+            expect(object.options).to include(server_side_encryption: 'aws:kms')
+            expect(object.options).to include(ssekms_key_id: 'alias/letsencrypt')
+          end
+        end
       end
     end
 
