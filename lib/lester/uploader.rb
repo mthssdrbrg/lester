@@ -14,7 +14,7 @@ module Lester
         certificate_body: certificate.to_pem,
         certificate_chain: certificate.chain_to_pem,
       }).server_certificate_metadata
-      certificate_id = metadata.certificate_id
+      certificate_id = metadata.server_certificate_id
       response = @cloudfront.get_distribution_config(id: @distribution_id)
       distribution_config = response.distribution_config.to_hash
       distribution_config[:viewer_certificate][:iam_certificate_id] = certificate_id

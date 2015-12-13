@@ -48,7 +48,7 @@ module Lester
 
     before do
       allow(iam_response).to receive(:server_certificate_metadata) do
-        double(certificate_id: 'certificate-id')
+        double(server_certificate_id: 'certificate-id')
       end
       allow(iam).to receive(:upload_server_certificate).and_return(iam_response)
       allow(certificate).to receive(:to_pem).and_return('PEM ENCODED CERTIFICATE')
