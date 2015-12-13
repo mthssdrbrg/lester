@@ -15,11 +15,15 @@ describe 'bin/lester renew' do
       '--site-bucket', 'example-org-site',
       '--storage-bucket', 'example-org-backup',
       '--email', 'contact@example.org',
+      '--distribution-id', 'distribution-id',
     ]
   end
 
   before do
     storage_bucket.put_object(key: 'example.org/account/private_key.pem', body: Pathname.new(private_key_path))
+    cloudfront.add_config('distribution-id', {
+      viewer_certificate: { iam_certificate_id: 'example.org-old' },
+    })
   end
 
   describe '#run' do
@@ -37,6 +41,12 @@ describe 'bin/lester renew' do
       it 'uploads the new certificate' do
         command.run
         expect(iam.certificates).to_not be_empty
+      end
+
+      it 'installs the certificate' do
+        command.run
+        update = cloudfront.updates.first
+        expect(update[:distribution_config][:viewer_certificate][:iam_certificate_id]).to eq('2ae9ea04d305762117cf854b39bb5ede')
       end
 
       it 'stores the certificate' do
@@ -92,6 +102,7 @@ describe 'bin/lester renew' do
             '--site-bucket', 'example-org-site',
             '--storage-bucket', 'example-org-backup',
             '--email', 'contact@example.org',
+            '--distribution-id', 'distribution-id',
             '--kms-id', 'alias/letsencrypt',
           ]
         end

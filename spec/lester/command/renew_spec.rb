@@ -94,7 +94,7 @@ module Lester
           expect(acme_client).to have_received(:new_certificate)
         end
 
-        it 'uploads the new certificate to IAM with a timestamp suffix' do
+        it 'uploads the new certificate with a timestamp suffix' do
           expect(uploader).to have_received(:upload).with('example.org-201601010000', new_certificate, private_key)
         end
 

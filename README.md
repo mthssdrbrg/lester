@@ -37,7 +37,8 @@ following:
 lester new --domain example.org \
            --site-bucket example-org \
            --storage-bucket example-org-backup \
-           --email contact@example.org
+           --email contact@example.org \
+           --distribution-id ABCDEFGH
 ```
 
 To enable server side encryption with KMS, one can specify the `-k / --kms-id`
@@ -48,6 +49,7 @@ lester new --domain example.org \
            --site-bucket example-org \
            --storage-bucket example-org-backup \
            --email contact@example.org \
+           --distribution-id ABCDEFGH \
            --kms-id alias/letsencrypt
 ```
 

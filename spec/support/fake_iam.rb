@@ -7,5 +7,10 @@ class FakeIAM
 
   def upload_server_certificate(args)
     @certificates << args
+    metadata = OpenStruct.new
+    metadata.certificate_id = Digest::MD5.hexdigest(args[:server_certificate_name])
+    response = OpenStruct.new
+    response.server_certificate_metadata = metadata
+    response
   end
 end

@@ -9,7 +9,7 @@ module Lester
     end
 
     def uploader
-      @uploader ||= Uploader.new(iam)
+      @uploader ||= Uploader.new(iam, cloudfront, @config[:distribution_id])
     end
 
     def acme_client
@@ -57,6 +57,10 @@ module Lester
 
     def iam
       @iam ||= Aws::IAM::Client.new
+    end
+
+    def cloudfront
+      @cloudfront ||= Aws::CloudFront::Client.new
     end
   end
 end

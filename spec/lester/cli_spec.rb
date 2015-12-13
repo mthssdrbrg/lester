@@ -71,6 +71,10 @@ module Lester
         context '-e / --email ADDRESS' do
           parameter_validation 'email'
         end
+
+        context '-D / --distribution-id ID' do
+          parameter_validation 'distribution-id', 'distribution id'
+        end
       end
     end
 
