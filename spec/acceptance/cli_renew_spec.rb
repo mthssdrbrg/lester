@@ -82,6 +82,7 @@ describe 'bin/lester renew' do
       it 'uses server side encryption for everything that is stored' do
         command.run
         keys = storage_bucket.keys.select { |k| k.start_with?('example.org/certificates') }
+        expect(keys).to_not be_empty
         keys.each do |key|
           object = storage_bucket.object(key)
           expect(object.options).to include(server_side_encryption: 'AES256')
@@ -110,6 +111,7 @@ describe 'bin/lester renew' do
         it 'uses server side encryption through AWS KMS' do
           command.run
           keys = storage_bucket.keys.select { |k| k.start_with?('example.org/certificates') }
+          expect(keys).to_not be_empty
           keys.each do |key|
             object = storage_bucket.object(key)
             expect(object.options).to include(server_side_encryption: 'aws:kms')
