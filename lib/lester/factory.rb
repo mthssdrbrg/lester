@@ -17,11 +17,11 @@ module Lester
     end
 
     def account_store
-      store.account
+      @account_store ||= create_store('account')
     end
 
     def certificate_store
-      store.certificates
+      @certificate_store ||= create_store('certificates')
     end
 
     def private_key
@@ -36,14 +36,18 @@ module Lester
 
     private
 
-    def store
-      @store ||= begin
+    def create_store(suffix)
+      S3Store.new(storage_bucket, sprintf('%s/%s', @config[:domain], suffix), store_options)
+    end
+
+    def store_options
+      @store_options ||= begin
         options = {server_side_encryption: 'AES256'}
         if (kms_key_id = @config[:kms_key_id])
           options[:server_side_encryption] = 'aws:kms'
           options[:ssekms_key_id] = kms_key_id
         end
-        Store.new(storage_bucket, @config[:domain], options)
+        options
       end
     end
 
