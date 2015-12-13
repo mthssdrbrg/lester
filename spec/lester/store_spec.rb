@@ -28,6 +28,8 @@ module Lester
           allow(bucket).to receive(:object).with('prefix/certificates/key.ext').and_return(object)
           allow(bucket).to receive(:put_object)
           allow(object).to receive(:key).and_return('prefix/certificates/key.ext')
+          allow(object).to receive(:get).and_return(object)
+          allow(object).to receive(:body).and_return(object)
           allow(object).to receive(:read).and_return('content')
           allow(object).to receive(:exists?).and_return(true)
         end

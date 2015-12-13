@@ -48,7 +48,7 @@ module Lester
         end
 
         def read
-          @object.read
+          @object.get.body.read
         end
 
         def extname

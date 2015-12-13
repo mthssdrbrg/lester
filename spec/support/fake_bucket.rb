@@ -35,6 +35,14 @@ class FakeBucket
       true
     end
 
+    def get
+      self
+    end
+
+    def body
+      self
+    end
+
     def read
       if @body.respond_to?(:read)
         @body.read
