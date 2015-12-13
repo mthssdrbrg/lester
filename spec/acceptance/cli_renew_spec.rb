@@ -20,7 +20,7 @@ describe 'bin/lester renew' do
   end
 
   before do
-    storage_bucket.put_object(key: 'example.org/account/private_key.pem', body: Pathname.new(private_key_path))
+    storage_bucket.put_object(key: 'example.org/account/private_key.json', body: Pathname.new(private_key_path))
     cloudfront.add_config('distribution-id', {
       viewer_certificate: { iam_certificate_id: 'example.org-old' },
     })
@@ -32,10 +32,10 @@ describe 'bin/lester renew' do
         command.run
         key = '.well-known/acme-challenge/EGJjhjKuz9x5yNbH8IXfcZO6OljhIrwPQeTeZUcsKao'
         object = site_bucket.object(key)
-        expect(object.read).to eq('EGJjhjKuz9x5yNbH8IXfcZO6OljhIrwPQeTeZUcsKao.UO9h3pHJ17bfwMzGvKlw-PSX0NpW9Dnf8xfaLhat7ac')
+        expect(object.read).to eq('EGJjhjKuz9x5yNbH8IXfcZO6OljhIrwPQeTeZUcsKao.XUQVUxLBe1x_yLe3HwXhatO3NImdF032T7C7BjKu6pc')
         key = '.well-known/acme-challenge/wdo3QEPA0D2mUav-Yx34nbNkq61bLOMjj_3obOYvE2E'
         object = site_bucket.object(key)
-        expect(object.read).to eq('wdo3QEPA0D2mUav-Yx34nbNkq61bLOMjj_3obOYvE2E.UO9h3pHJ17bfwMzGvKlw-PSX0NpW9Dnf8xfaLhat7ac')
+        expect(object.read).to eq('wdo3QEPA0D2mUav-Yx34nbNkq61bLOMjj_3obOYvE2E.XUQVUxLBe1x_yLe3HwXhatO3NImdF032T7C7BjKu6pc')
       end
 
       it 'uploads the new certificate' do

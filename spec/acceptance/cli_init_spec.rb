@@ -19,8 +19,8 @@ describe 'bin/lester init' do
   context 'when the private key exists' do
     it 'stores it' do
       command.run
-      object = storage_bucket.object('example.org/account/private_key.pem')
-      expect { OpenSSL::PKey::RSA.new(object.read) }.to_not raise_error
+      object = storage_bucket.object('example.org/account/private_key.json')
+      expect { JSON::JWK.new(JSON.parse(object.read)).to_key }.to_not raise_error
     end
 
     it 'returns an ok exit code' do

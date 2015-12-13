@@ -10,7 +10,7 @@ module Lester
   UnkownCommandError = Class.new(Error)
   UnknownKeyFormatError = Class.new(Error)
 
-  KEY_NAME = 'private_key.pem'.freeze
+  KEY_NAME = 'private_key.json'.freeze
 end
 
 require 'lester/authenticator'

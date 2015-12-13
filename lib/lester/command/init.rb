@@ -11,7 +11,7 @@ module Lester
       end
 
       def run
-        @store.put(KEY_NAME, @private_key.to_pem)
+        @store.put(KEY_NAME, @private_key.to_jwk.to_json)
       end
     end
   end

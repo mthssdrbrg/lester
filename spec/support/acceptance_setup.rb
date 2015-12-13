@@ -4,7 +4,7 @@ shared_context 'acceptance setup' do
   end
 
   let :private_key_path do
-    File.expand_path('../../support/resources/privkey.pem', __FILE__)
+    File.expand_path('../../support/resources/privkey.json', __FILE__)
   end
 
   let :iam do

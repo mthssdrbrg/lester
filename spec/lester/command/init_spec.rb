@@ -16,14 +16,14 @@ module Lester
       end
 
       before do
-        allow(private_key).to receive(:to_pem).and_return('PEM')
+        allow(private_key).to receive(:to_jwk).and_return({})
         allow(store).to receive(:put)
       end
 
       describe '#run' do
-        it 'unconditionally stores the key in PEM format' do
+        it 'unconditionally stores the key in JSON JWK format' do
           command.run
-          expect(store).to have_received(:put).with('private_key.pem', 'PEM')
+          expect(store).to have_received(:put).with('private_key.json', '{}')
         end
       end
     end
