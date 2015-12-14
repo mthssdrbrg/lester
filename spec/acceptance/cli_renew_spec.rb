@@ -13,10 +13,14 @@ describe 'bin/lester renew' do
       '--domain', 'example.org',
       '--endpoint', 'http://127.0.0.1:4000',
       '--site-bucket', 'example-org-site',
-      '--storage-bucket', 'example-org-backup',
+      '--storage-bucket', storage_bucket_name,
       '--email', 'contact@example.org',
       '--distribution-id', 'distribution-id',
     ]
+  end
+
+  let :storage_bucket_name do
+    'example-org-backup'
   end
 
   before do
@@ -116,6 +120,22 @@ describe 'bin/lester renew' do
             object = storage_bucket.object(key)
             expect(object.options).to include(server_side_encryption: 'aws:kms')
             expect(object.options).to include(ssekms_key_id: 'alias/letsencrypt')
+          end
+        end
+      end
+
+      context 'when --storage-bucket includes a prefix' do
+        let :storage_bucket_name do
+          'example-org-backup/lester'
+        end
+
+        it 'stores everything under given prefix' do
+          storage_bucket.put_object(key: 'lester/example.org/account/private_key.json', body: Pathname.new(private_key_path))
+          command.run
+          keys = storage_bucket.keys.select { |k| k.start_with?('lester') }
+          expect(keys).to_not be_empty
+          keys.each do |key|
+            expect(key).to start_with('lester/example.org')
           end
         end
       end

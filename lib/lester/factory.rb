@@ -37,7 +37,11 @@ module Lester
     private
 
     def create_store(suffix)
-      S3Store.new(storage_bucket, sprintf('%s/%s', @config[:domain], suffix), store_options)
+      uri = URI(sprintf('s3://%s', @config[:storage_bucket]))
+      bucket_name = uri.host
+      prefix = sprintf('%s/%s/%s', uri.path, @config[:domain], suffix).sub('/', '')
+      bucket = Aws::S3::Bucket.new(bucket_name)
+      S3Store.new(bucket, prefix, store_options)
     end
 
     def store_options
@@ -53,10 +57,6 @@ module Lester
 
     def site_bucket
       @site_bucket ||= Aws::S3::Bucket.new(@config[:site_bucket])
-    end
-
-    def storage_bucket
-      @storage_bucket ||= Aws::S3::Bucket.new(@config[:storage_bucket])
     end
 
     def iam

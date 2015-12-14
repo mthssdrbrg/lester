@@ -11,9 +11,13 @@ describe 'bin/lester init' do
     [
       'init',
       '--domain', 'example.org',
-      '--storage-bucket', 'example-org-backup',
+      '--storage-bucket', storage_bucket_name,
       '--private-key', private_key_path,
     ]
+  end
+
+  let :storage_bucket_name do
+    'example-org-backup'
   end
 
   context 'when the private key exists' do
@@ -26,6 +30,18 @@ describe 'bin/lester init' do
     it 'returns an ok exit code' do
       code = command.run
       expect(code).to eq(0)
+    end
+  end
+
+  context 'when --storage-bucket includes a prefix' do
+    let :storage_bucket_name do
+      'example-org-backup/lester'
+    end
+
+    it 'stores it under the given prefix' do
+      command.run
+      object = storage_bucket.object('lester/example.org/account/private_key.json')
+      expect { JSON::JWK.new(JSON.parse(object.read)).to_key }.to_not raise_error
     end
   end
 
