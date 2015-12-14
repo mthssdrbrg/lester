@@ -1,4 +1,8 @@
-$: << File.expand_path('../lib', __FILE__)
+if ENV['BUNDLE_GEMFILE'] && !ENV['TRAVIS']
+  $: << File.expand_path('../..', __FILE__)
+else
+  $: << File.expand_path('../lib', __FILE__)
+end
 
 require 'lester/version'
 
@@ -17,11 +21,15 @@ Gem::Specification.new do |s|
   s.bindir        = 'bin'
   s.executables   = %w[lester]
   s.license       = 'MIT'
+  s.add_runtime_dependency 'json', '= 1.8.2'
   s.add_runtime_dependency 'acme-client', '< 1'
   s.add_runtime_dependency 'aws-sdk', '~> 2'
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'simplecov', '~> 0.11'
   s.add_development_dependency 'webmock', '~> 1'
   s.add_development_dependency 'vcr', '~> 3'
+  s.add_development_dependency 'tara', '< 1'
+  s.add_development_dependency 'github_api', '< 1'
+  s.add_development_dependency 'mime-types', '~> 3'
   s.required_ruby_version = '>= 2.1'
 end
