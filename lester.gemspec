@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.executables   = %w[lester]
   s.license       = 'MIT'
   s.add_runtime_dependency 'json', '= 1.8.2'
-  s.add_runtime_dependency 'acme-client', '< 1'
+  s.add_runtime_dependency 'acme-client', '= 0.2.2'
   s.add_runtime_dependency 'aws-sdk', '~> 2'
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'simplecov', '~> 0.11'
