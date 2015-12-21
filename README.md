@@ -10,15 +10,14 @@ It uses S3 for storing certificates and expects that the private key for a
 registered account is available from S3. Server side encryption is enabled by
 default for all objects written by Lester, and it's possible to use KMS as well.
 
-Should be noted that even though only a single domain is passed to `lester`, it
-will actually include both the given domain and the `www` subdomain (i.e. `www.<domain>`)
-when requesting a new certificate.
-
 # Installation
 
 ```shell
 gem install lester --pre
 ```
+
+There are also self-contained binary artifacts attached to [each release on
+GitHub](https://github.com/mthssdrbrg/lester/releases), for usage where a Ruby runtime isn't installed (for example AWS Lambda).
 
 # Usage
 
@@ -35,26 +34,30 @@ following:
 
 ```shell
 lester new --domain example.org \
+           --email contact@example.org \
            --site-bucket example-org \
            --storage-bucket example-org-backup \
-           --email contact@example.org \
            --distribution-id ABCDEFGH
 ```
 
-To enable server side encryption with KMS, one can specify the `-k / --kms-id`
-with eiither a key ID or alias:
+To enable server side encryption with KMS, specify `-k / --kms-id` with
+either a key ID or an alias:
 
 ```shell
 lester new --domain example.org \
+           --email contact@example.org \
            --site-bucket example-org \
            --storage-bucket example-org-backup \
-           --email contact@example.org \
            --distribution-id ABCDEFGH \
            --kms-id alias/letsencrypt
 ```
 
-It's also possible to use `renew` rather than `new` if one prefers, the result
+It's also possible to use `renew` rather than `new` if preferable, the result
 will be the same.
+
+Should be noted that even though only a single domain is passed to `lester`, it
+will actually include both the given domain and the `www` subdomain when
+requesting a new certificate.
 
 See `lester --help` for information about other command-line parameters.
 
