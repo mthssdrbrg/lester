@@ -32,7 +32,7 @@ namespace :archive do
     archiver.create
   end
 
-  desc 'Create a new archive'
+  desc 'Create a new archive for Linux x86_64'
   task :package do
     build
   end
@@ -56,10 +56,10 @@ namespace :archive do
         })
       end
     else
-      abort('Missing GITHUB_OAUTH_TOKEN env. variable')
+      abort('Missing GITHUB_OAUTH_TOKEN env variable')
     end
   end
 end
 
 desc 'Run tests and release a new gem & binary'
-task :release => %w[spec gem:release binary:release]
+task :release => %w[spec gem:release archive:release]
