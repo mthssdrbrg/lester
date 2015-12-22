@@ -13,7 +13,7 @@ module Lester
         @store = store
         @key_size = options[:key_size] || 2048
         @key_class = options[:key_class] || OpenSSL::PKey::RSA
-        @csr_class = options[:csr_class] || Acme::CertificateRequest
+        @csr_class = options[:csr_class] || Acme::Client::CertificateRequest
       end
 
       def run

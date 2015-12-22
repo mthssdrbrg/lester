@@ -157,7 +157,7 @@ describe 'bin/lester renew' do
     context 'with a non-registered private key', vcr: { cassette_name: 'new-certificate-fail' } do
       it 'prints an error message' do
         command.run
-        expect(io.string.chomp).to eq('No registration exists matching provided key (Acme::Error::Unauthorized)')
+        expect(io.string.chomp).to eq('No registration exists matching provided key (Acme::Client::Error::Unauthorized)')
       end
 
       it 'returns a non-ok exit code' do

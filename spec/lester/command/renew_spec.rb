@@ -65,7 +65,7 @@ module Lester
       end
 
       let :new_certificate do
-        Acme::Certificate.new(certificate, chain, nil)
+        Acme::Client::Certificate.new(certificate, chain, nil)
       end
 
       before do
@@ -75,7 +75,7 @@ module Lester
         allow(authenticator).to receive(:authenticate).with(http01_challenge)
         allow(uploader).to receive(:upload)
         allow(csr_impl).to receive(:new) do |args|
-          Acme::CertificateRequest.new(args)
+          Acme::Client::CertificateRequest.new(args)
         end
         allow(store).to receive(:put)
       end
