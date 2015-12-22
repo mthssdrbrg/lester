@@ -1,8 +1,5 @@
-if ENV['BUNDLE_GEMFILE'] && !ENV['TRAVIS']
-  $: << File.expand_path('../..', __FILE__)
-else
-  $: << File.expand_path('../lib', __FILE__)
-end
+$: << File.expand_path('../..', __FILE__)
+$: << File.expand_path('../lib', __FILE__)
 
 require 'lester/version'
 
