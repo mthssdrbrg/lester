@@ -14,7 +14,6 @@ describe 'bin/lester renew' do
       '--endpoint', 'http://127.0.0.1:4000',
       '--site-bucket', 'example-org-site',
       '--storage-bucket', storage_bucket_name,
-      '--email', 'contact@example.org',
       '--distribution-id', 'distribution-id',
     ]
   end
@@ -106,7 +105,6 @@ describe 'bin/lester renew' do
             '--endpoint', 'http://127.0.0.1:4000',
             '--site-bucket', 'example-org-site',
             '--storage-bucket', 'example-org-backup',
-            '--email', 'contact@example.org',
             '--distribution-id', 'distribution-id',
             '--kms-id', 'alias/letsencrypt',
           ]

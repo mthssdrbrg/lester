@@ -34,7 +34,6 @@ following:
 
 ```shell
 lester new --domain example.org \
-           --email contact@example.org \
            --site-bucket example-org \
            --storage-bucket example-org-backup \
            --distribution-id ABCDEFGH
@@ -45,7 +44,6 @@ either a key ID or an alias:
 
 ```shell
 lester new --domain example.org \
-           --email contact@example.org \
            --site-bucket example-org \
            --storage-bucket example-org-backup \
            --distribution-id ABCDEFGH \

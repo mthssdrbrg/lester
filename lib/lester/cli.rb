@@ -39,7 +39,6 @@ module Lester
           validate(@domain, 'domain is required')
           validate(@storage_bucket, 'storage bucket is required')
           validate(@site_bucket, 'site bucket is required')
-          validate(@email, 'email is required')
           validate(@distribution_id, 'distribution id is required')
         else
           raise UnkownCommandError, sprintf('Unknown command %p, expected "init" or "re|new"', @command)
@@ -80,7 +79,6 @@ module Lester
         opts.on('-E', '--endpoint=ENDPOINT', sprintf('ACME endpoint (default: %s)', @endpoint)) { |e| @endpoint = e }
         opts.on('-b', '--site-bucket=BUCKET', 'S3 bucket for site (required)') { |b| @site_bucket = b }
         opts.on('-k', '--key-size=BITS', sprintf('Key size (in bits) (default: %d)', @key_size)) { |s| @key_size = s.to_i }
-        opts.on('-e', '--email=ADDRESS', 'Registered email address (required)') { |e| @email = e }
         opts.on('-D', '--distribution-id=ID', 'CloudFront distribution ID (required)') { |d| @distribution_id = d }
         opts.separator ''
       end

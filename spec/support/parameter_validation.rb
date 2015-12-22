@@ -6,7 +6,6 @@ module ParameterValidation
         'endpoint' => 'http://127.0.0.1:4000',
         'site-bucket' => 'example-org-site',
         'storage-bucket' => 'example-org-backup',
-        'email' => 'contact@example.org',
         'private-key' => 'path/to/private_key.pem',
       }
     end
