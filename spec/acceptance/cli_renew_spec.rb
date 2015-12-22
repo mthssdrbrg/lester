@@ -23,7 +23,7 @@ describe 'bin/lester renew' do
   end
 
   before do
-    storage_bucket.put_object(key: 'example.org/account/private_key.json', body: Pathname.new(private_key_path))
+    storage_bucket.put_object(key: 'account/private_key.json', body: Pathname.new(private_key_path))
     cloudfront.add_config('distribution-id', {
       viewer_certificate: { iam_certificate_id: 'example.org-old' },
     })
@@ -54,37 +54,37 @@ describe 'bin/lester renew' do
 
       it 'stores the certificate' do
         command.run
-        object = storage_bucket.object('example.org/certificates/201512120949/cert.pem')
+        object = storage_bucket.object('certificates/example.org/201512120949/cert.pem')
         expect { OpenSSL::X509::Certificate.new(object.read) }.to_not raise_error
       end
 
       it 'stores the certificate request' do
         command.run
-        object = storage_bucket.object('example.org/certificates/201512120949/csr.pem')
+        object = storage_bucket.object('certificates/example.org/201512120949/csr.pem')
         expect { OpenSSL::X509::Request.new(object.read) }.to_not raise_error
       end
 
       it 'stores the certificate chain' do
         command.run
-        object = storage_bucket.object('example.org/certificates/201512120949/chain.pem')
+        object = storage_bucket.object('certificates/example.org/201512120949/chain.pem')
         expect { OpenSSL::X509::Certificate.new(object.read) }.to_not raise_error
       end
 
       it 'stores the certificate fullchain' do
         command.run
-        object = storage_bucket.object('example.org/certificates/201512120949/fullchain.pem')
+        object = storage_bucket.object('certificates/example.org/201512120949/fullchain.pem')
         expect { OpenSSL::X509::Certificate.new(object.read) }.to_not raise_error
       end
 
       it 'stores the certificate private key' do
         command.run
-        object = storage_bucket.object('example.org/certificates/201512120949/privkey.pem')
+        object = storage_bucket.object('certificates/example.org/201512120949/privkey.pem')
         expect { OpenSSL::PKey::RSA.new(object.read) }.to_not raise_error
       end
 
       it 'uses server side encryption for everything that is stored' do
         command.run
-        keys = storage_bucket.keys.select { |k| k.start_with?('example.org/certificates') }
+        keys = storage_bucket.keys.select { |k| k.start_with?('certificates/example.org') }
         expect(keys).to_not be_empty
         keys.each do |key|
           object = storage_bucket.object(key)
@@ -112,7 +112,7 @@ describe 'bin/lester renew' do
 
         it 'uses server side encryption through AWS KMS' do
           command.run
-          keys = storage_bucket.keys.select { |k| k.start_with?('example.org/certificates') }
+          keys = storage_bucket.keys.select { |k| k.start_with?('certificates/example.org') }
           expect(keys).to_not be_empty
           keys.each do |key|
             object = storage_bucket.object(key)
@@ -128,13 +128,10 @@ describe 'bin/lester renew' do
         end
 
         it 'stores everything under given prefix' do
-          storage_bucket.put_object(key: 'lester/example.org/account/private_key.json', body: Pathname.new(private_key_path))
+          storage_bucket.put_object(key: 'lester/account/private_key.json', body: Pathname.new(private_key_path))
           command.run
-          keys = storage_bucket.keys.select { |k| k.start_with?('lester') }
+          keys = storage_bucket.keys.select { |k| k.start_with?('lester/certificates') }
           expect(keys).to_not be_empty
-          keys.each do |key|
-            expect(key).to start_with('lester/example.org')
-          end
         end
       end
     end

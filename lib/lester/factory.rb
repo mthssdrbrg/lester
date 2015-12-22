@@ -21,7 +21,7 @@ module Lester
     end
 
     def certificate_store
-      @certificate_store ||= create_store('certificates')
+      @certificate_store ||= create_store(sprintf('certificates/%s', @config[:domain]))
     end
 
     def private_key
@@ -39,7 +39,7 @@ module Lester
     def create_store(suffix)
       uri = URI(sprintf('s3://%s', @config[:storage_bucket]))
       bucket_name = uri.host
-      prefix = sprintf('%s/%s/%s', uri.path, @config[:domain], suffix).sub('/', '')
+      prefix = sprintf('%s/%s', uri.path, suffix).sub('/', '')
       bucket = Aws::S3::Bucket.new(bucket_name)
       S3Store.new(bucket, prefix, store_options)
     end
