@@ -8,6 +8,8 @@ module Lester
       @io = io
       @key_size = 2048
       @endpoint = 'https://acme-v01.api.letsencrypt.org/'
+      @quiet = false
+      @verbose = false
     end
 
     def run
@@ -20,6 +22,7 @@ module Lester
       1
     rescue => e
       @io.puts(sprintf('%s (%s)', e.message, e.class.name))
+      @io.puts(e.backtrace.join($/))
       1
     end
 
@@ -72,6 +75,8 @@ module Lester
         opts.on('-s', '--storage-bucket=BUCKET', 'S3 bucket for storing keys and certificates (required)') { |b| @storage_bucket = b }
         opts.on('-K', '--kms-id=KEY_ID', 'AWS KMS Key ID') { |k| @kms_key_id = k }
         opts.on('-k', '--key-name=KEY_NAME', '"Name" of private key') { |k| @key_name = k }
+        opts.on('-q', '--quiet', 'Less output') { @quiet = true }
+        opts.on('-V', '--verbose', 'More output') { @verbose = true }
         opts.separator ''
         opts.separator 'init options:'
         opts.on('-p', '--private-key=PATH', 'Path to private key (required)') { |p| @private_key_path = p }
@@ -95,6 +100,8 @@ module Lester
         private_key_path: @private_key_path,
         distribution_id: @distribution_id,
         key_name: @key_name,
+        quiet: @quiet,
+        verbose: @verbose,
       })
     end
   end
