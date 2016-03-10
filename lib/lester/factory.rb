@@ -29,9 +29,13 @@ module Lester
         if (key_path = @config[:private_key_path])
           PrivateKey.new(Pathname.new(key_path)).load
         else
-          PrivateKey.new(account_store.get(KEY_NAME)).load
+          PrivateKey.new(account_store.get(key_name)).load
         end
       end
+    end
+
+    def key_name
+      @key_name ||= sprintf('%s.json', @config[:key_name] || 'private_key')
     end
 
     private

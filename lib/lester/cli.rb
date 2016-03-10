@@ -71,6 +71,7 @@ module Lester
         opts.on('-d', '--domain=NAME', 'Domain name (required)') { |d| @domain = d }
         opts.on('-s', '--storage-bucket=BUCKET', 'S3 bucket for storing keys and certificates (required)') { |b| @storage_bucket = b }
         opts.on('-K', '--kms-id=KEY_ID', 'AWS KMS Key ID') { |k| @kms_key_id = k }
+        opts.on('-k', '--key-name=KEY_NAME', '"Name" of private key') { |k| @key_name = k }
         opts.separator ''
         opts.separator 'init options:'
         opts.on('-p', '--private-key=PATH', 'Path to private key (required)') { |p| @private_key_path = p }
@@ -93,6 +94,7 @@ module Lester
         site_bucket: @site_bucket,
         private_key_path: @private_key_path,
         distribution_id: @distribution_id,
+        key_name: @key_name,
       })
     end
   end
