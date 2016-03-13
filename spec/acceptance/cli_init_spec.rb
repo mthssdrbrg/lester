@@ -23,7 +23,7 @@ describe 'bin/lester init' do
   context 'when the private key exists' do
     it 'stores it' do
       command.run
-      object = storage_bucket.object('account/private_key.json')
+      object = storage_bucket.object('account/default.json')
       expect { JSON::JWK.new(JSON.parse(object.read)).to_key }.to_not raise_error
     end
 
@@ -40,7 +40,7 @@ describe 'bin/lester init' do
 
     it 'stores it under the given prefix' do
       command.run
-      object = storage_bucket.object('lester/account/private_key.json')
+      object = storage_bucket.object('lester/account/default.json')
       expect { JSON::JWK.new(JSON.parse(object.read)).to_key }.to_not raise_error
     end
   end

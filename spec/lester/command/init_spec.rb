@@ -4,11 +4,15 @@ module Lester
   module Command
     describe Init do
       let :command do
-        described_class.new(private_key, store)
+        described_class.new(private_key, key_name, store)
       end
 
       let :private_key do
         double(:private_key)
+      end
+
+      let :key_name do
+        'private_key.json'
       end
 
       let :store do

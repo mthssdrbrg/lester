@@ -23,7 +23,7 @@ describe 'bin/lester renew' do
   end
 
   before do
-    storage_bucket.put_object(key: 'account/private_key.json', body: Pathname.new(private_key_path))
+    storage_bucket.put_object(key: 'account/default.json', body: Pathname.new(private_key_path))
     cloudfront.add_config('distribution-id', {
       viewer_certificate: { iam_certificate_id: 'example.org-old' },
     })
@@ -128,7 +128,7 @@ describe 'bin/lester renew' do
         end
 
         it 'stores everything under given prefix' do
-          storage_bucket.put_object(key: 'lester/account/private_key.json', body: Pathname.new(private_key_path))
+          storage_bucket.put_object(key: 'lester/account/default.json', body: Pathname.new(private_key_path))
           command.run
           keys = storage_bucket.keys.select { |k| k.start_with?('lester/certificates') }
           expect(keys).to_not be_empty
