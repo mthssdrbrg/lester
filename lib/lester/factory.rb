@@ -35,7 +35,7 @@ module Lester
     end
 
     def key_name
-      @key_name ||= sprintf('%s.json', @config[:key_name] || 'private_key')
+      @key_name ||= sprintf('%s.json', @config[:key_name] || 'default')
     end
 
     private
