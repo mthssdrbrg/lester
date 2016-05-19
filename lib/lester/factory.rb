@@ -38,6 +38,10 @@ module Lester
       @key_name ||= sprintf('%s.json', @config[:key_name] || 'default')
     end
 
+    def logger
+      @logger ||= Logger.new(@config[:quiet], @config[:verbose])
+    end
+
     private
 
     def create_store(suffix)
@@ -50,7 +54,7 @@ module Lester
 
     def store_options
       @store_options ||= begin
-        options = {server_side_encryption: 'AES256'}
+        options = {server_side_encryption: 'AES256', logger: logger}
         if (kms_key_id = @config[:kms_key_id])
           options[:server_side_encryption] = 'aws:kms'
           options[:ssekms_key_id] = kms_key_id

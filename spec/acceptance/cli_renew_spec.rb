@@ -15,6 +15,7 @@ describe 'bin/lester renew' do
       '--site-bucket', 'example-org-site',
       '--storage-bucket', storage_bucket_name,
       '--distribution-id', 'distribution-id',
+      '--quiet',
     ]
   end
 
@@ -107,6 +108,7 @@ describe 'bin/lester renew' do
             '--storage-bucket', 'example-org-backup',
             '--distribution-id', 'distribution-id',
             '--kms-id', 'alias/letsencrypt',
+            '--quiet',
           ]
         end
 
@@ -152,7 +154,7 @@ describe 'bin/lester renew' do
     context 'with a non-registered private key', vcr: { cassette_name: 'new-certificate-fail' } do
       it 'prints an error message' do
         command.run
-        expect(io.string.chomp).to eq('No registration exists matching provided key (Acme::Client::Error::Unauthorized)')
+        expect(io.string.chomp).to match(/No registration exists matching provided key \(Acme::Client::Error::Unauthorized\)/)
       end
 
       it 'returns a non-ok exit code' do

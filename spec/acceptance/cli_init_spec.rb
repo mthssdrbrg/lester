@@ -13,6 +13,7 @@ describe 'bin/lester init' do
       '--domain', 'example.org',
       '--storage-bucket', storage_bucket_name,
       '--private-key', private_key_path,
+      '--quiet',
     ]
   end
 

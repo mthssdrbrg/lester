@@ -3,20 +3,25 @@ module Lester
     def initialize(bucket, prefix, options={})
       @bucket = bucket
       @prefix = prefix
-      @options = options
+      @options = options.dup
+      @logger = @options.delete(:logger) || NullLogger.new
     end
 
     def get(name)
-      Proxy.new(@bucket.object(format_name(name)))
+      prefixed_name = prefix_name(name)
+      @logger.debug(sprintf('Fetching %p at %p', name, prefixed_name))
+      Proxy.new(@bucket.object(prefixed_name))
     end
 
     def put(name, contents)
-      @bucket.put_object(@options.merge(key: format_name(name), body: contents))
+      prefixed_name = prefix_name(name)
+      @logger.debug(sprintf('Storing %p at %p', name, prefixed_name))
+      @bucket.put_object(@options.merge(key: prefixed_name, body: contents))
     end
 
     private
 
-    def format_name(name)
+    def prefix_name(name)
       sprintf('%s/%s', @prefix, name)
     end
 
